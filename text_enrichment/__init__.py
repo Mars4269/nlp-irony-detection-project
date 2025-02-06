@@ -1,0 +1,3 @@
+from .text_enrichment import estrai_hastag, collect_info, collect_info_string, remove_empty_list, create_occurrences_dict, calcola_prob_hastag_dato_iro, find_relevant_features, get_prob_from_sentence
+__all__ = ['text_enrichment', 'estrai_hastag', 'collect_info', 'collect_info_string', 'remove_empty_list', 'create_occurrences_dict', 'calcola_prob_hastag_dato_iro', 'find_relevant_features', 'get_prob_from_sentence']
+print('Importato package text_enrichment.')
