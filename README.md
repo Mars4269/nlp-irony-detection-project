@@ -1,7 +1,3 @@
-Here’s a **README.md** file for your GitHub repository on **GRU-based and BERT-based architectures for irony detection on Italian tweets**. It includes project details, setup instructions, and usage examples.
-
----
-
 # 🧠 Irony Detection in Italian Tweets: GRU & BERT Architectures
 
 This repository contains implementations of **GRU-based** and **BERT-based** models for **irony detection** in Italian tweets. The project explores how deep learning and transformer-based architectures can be leveraged to detect irony, an important task in **sentiment analysis** and **natural language processing (NLP)**.
@@ -117,7 +113,3 @@ python src/evaluate.py --model bert  # or gru
 ## 📜 License
 
 This project is licensed under the MIT License.
-
----
-
-Let me know if you'd like any modifications! 🚀
