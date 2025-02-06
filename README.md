@@ -12,21 +12,26 @@ Detecting irony in tweets is a challenging NLP task due to the **subtlety of lin
 ## 📂 Repository Structure
 
 ```
-.
-├── data/                   # Dataset (not included)
-├── models/                 # Saved models and checkpoints
-├── notebooks/              # Jupyter notebooks for EDA and training
-│   ├── 1_EDA.ipynb         # Exploratory Data Analysis (EDA)
-│   ├── 2_GRU_Model.ipynb   # GRU-based model training
-│   ├── 3_GruBERT_Model.ipynb  # GruBERT model training
-│   ├── 4_Evaluation.ipynb  # Model evaluation
-├── src/                    # Source code for models and utilities
-│   ├── dataset.py          # Dataset preprocessing
-│   ├── train.py            # Training script
-│   ├── evaluate.py         # Model evaluation script
-│   ├── models.py           # GRU and GruBERT model architectures
-├── requirements.txt        # Dependencies
-├── README.md               # Project documentation
+├───1_data_exploration
+│   └───output/
+├───2_hashtag_enrichment
+│   └───output/
+├───3_preprocessing
+│   └───output/
+│       ├───gru/
+│       └───grubert/
+├───4_baselines_and_models
+│   └───output/
+├───5_grid_search/
+├───6_training
+│   └───plots/
+├───7_evaluation/
+├───8_error_analysis/
+├───data/
+├───grid_search
+│   └───imgs/  # Retained since it's inside grid_search
+└───text_enrichment/
+
 ```
 
 ## 📊 Dataset
