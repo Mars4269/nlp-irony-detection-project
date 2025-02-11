@@ -60,6 +60,7 @@ def emoji_and_emoticons_preprocessing(
         if verbose:
             print_step("translate_emojis", data)
     return data
+
 def fundamental_preprocessing(
     data: pd.DataFrame, 
     lowercase: bool = False, 
