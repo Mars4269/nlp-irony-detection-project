@@ -141,8 +141,6 @@ class ModelFactory:
 
         if "hashtag_enrichment" in cfg_lower:
             hashtag_segmentation = False
-            pos_tags = True
-            num_tags = 48
             text_enrichment = True
 
         return {

@@ -366,11 +366,13 @@ def get_tweets_in_circle(
         print(f"\nTweets inside the circle (center=({x}, {y}), radius={r}):")
         for idx in inside_indices:
             row = df.iloc[idx]
+            print(row)
             text_val = row[text_column]
             label_val = row[label_column]
-            pred_val = row[prediction_column]
+            # pred_val = row[prediction_column]
             
-            print(f"---\nTweet:\n{text_val}\nLabel:\n{label_val}\nPredicted:\n{pred_val}\n")
+            #print(f"---\nTweet:\n{text_val}\nLabel:\n{label_val}\nPredicted:\n{pred_val}\n")
+            print(f"---\nTweet:\n{text_val}\nLabel:\n{label_val}\n")
     
     return inside_df
 
