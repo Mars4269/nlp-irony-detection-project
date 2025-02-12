@@ -1,10 +1,5 @@
 import re
 import pandas as pd
-"""
-qua ci occupiamo di reare l'array di features
-TODO salvare le feature e le rispettive probabilità
-
-"""
 
 def estrai_hastag(testo:str)->list: return [hashtag.lstrip('#') for hashtag in re.findall(r'#\w+', testo)] 
 
@@ -77,10 +72,6 @@ def calcola_prob_hastag_dato_iro(occ_dict:dict, iro:int=0, n_top_tweet = 15, pro
     for _, elem in enumerate(sorted(occ_dict[iro].items(), key=lambda x: x[1], reverse=True)):
         if (elem[1]/tot_n_iro) < prob_thr : break
         if _ > n_top_tweet : break
-        
-        # hashtag = elem[0].ljust(20)  # Allinea l'hashtag a sinistra con 20 caratteri di spazio
-        # print(f'P({hashtag}|iro=0)\t= {elem[1]/tot_n_iro:.4f}')
-
         p_hastg[elem[0]] = elem[1]/tot_n_iro
     return p_hastg
 
@@ -98,21 +89,19 @@ def find_relevant_features(df_r: pd, link_as_hastag = False, placeholder_list:li
     iro = 1
     p_feature_iro = calcola_prob_hastag_dato_iro(dizionario_occorrenze, iro=iro)        # eg. P(grillo|iro=1)
 
-    """
-    voglio capire se è il caso di levare le probabilità che si avvicinano molto a 
-        P(grillo|iro=0)
-    devo pensare
-    devo
-    pens
-
-    """
-
-    # n_tweet = len(df) # n. di tweet che contengono gli elem che stiamo tracciando
+    # Bayes th.
+    # n_tweet = len(df)
     # p_iro = sum(dizionario_occorrenze[1].values())/n_tweet
-    # relevant_features = p_feature_iro.keys()
-    # p = {features:(dizionario_occorrenze[0][features] + dizionario_occorrenze[1][features])/n_tweet for features in relevant_features}
 
-    p_iro_hastg = {tweet:(dizionario_occorrenze[1][tweet])/(dizionario_occorrenze[0][tweet] + dizionario_occorrenze[1][tweet]) for tweet in p_feature_iro.keys()}
+    # p_tweet = {tweet:(dizionario_occorrenze[0][tweet] + dizionario_occorrenze[1][tweet])/n_tweet for tweet in p_feature_iro.keys()}
+
+    # p_iro_hastg_2 = {tweet: (p_feature_iro[tweet] * p_iro)/p_tweet[tweet] for tweet in p_feature_iro.keys()}
+    # p_iro_hastg_2
+
+    p_iro_hastg = {tweet:
+                   (dizionario_occorrenze[1][tweet])/
+                   (dizionario_occorrenze[0][tweet] + dizionario_occorrenze[1][tweet])
+                   for tweet in p_feature_iro.keys()}
 
     return p_iro_hastg
 
@@ -127,37 +116,6 @@ def get_prob_from_sentence(text:str='', features_dict: dict = {})->int:
     for feature in features_extracted:
         if feature.lower() in features_dict.keys():
             prob = max(prob, features_dict[feature.lower()])
-    
-    # this list can be used if we want to consider some specific word as feature for ironc tweets
-    list_of_ironic_words = ['ironia', 'ironico', 'sarcasmo',    # paper dice che miglioranole prestazioni
-                            'monti?!'                           # è la parola tale che |parola in tweet ironico|-|parola in tweet non ironico| è maggiore nel nostro trainset
-                            ]
-    list_of_ironic_words = []
-
-    for word in list_of_ironic_words:
-        if word in text.lower():
-            # ragà se c'èscritto '#ironia portami a fanculo
-            # allora probabilmenteè iropnica.
-            return max(prob, 0.4) 
-    
-    # qua la cella se volete vedere da dove viene fuori.
-    # from text_enrichment import create_occurrences_dict
-
-    # df['list'] = df['text'].apply(lambda x : x.split())
-
-    # dizionario = create_occurrences_dict(df, colname='list')
-
-    # chiavi = set(dizionario[1].keys()).intersection(set(dizionario[0].keys()))
-
-    # differenze = {
-    #     key: (dizionario[1][key], dizionario[0][key], dizionario[1][key] - dizionario[0][key])
-    #     for key in chiavi
-    # }
-
-    # dizionario_ordinato = dict(sorted(differenze.items(), key=lambda x: x[1][2], reverse=True))
-
-    # for key, (val1, val2, diff) in dizionario_ordinato.items():
-    #     print(f'{key}\t\ttrue {val1}, false {val2}, differenza {diff}')
 
     return prob
 
